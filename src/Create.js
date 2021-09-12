@@ -3,18 +3,17 @@ import { useHistory } from 'react-router-dom';
 
 const Create = () => {
     const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
-    const [author, setAuthor] = useState('Shubham');
+    const [content, setContent] = useState('');
     const [isPending, setIsPending] = useState(false);
     const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const blog = { title, body, author };
+        const blog = { title, content, };
 
         setIsPending(true);
 
-        fetch('http://localhost:8000/blogs', {
+        fetch('http://localhost:8000/blog', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(blog)
@@ -35,21 +34,12 @@ const Create = () => {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
-                <label>Blog Body:</label>
+                <label>Blog Content:</label>
                 <textarea
                     required
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
                 />
-                <label>Blog author:</label>
-                <select
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                >
-                    <option value="Shubham">Shubham</option>
-                    <option value="Satyam">Satyam</option>
-                    <option value="Anmol">Anmol</option>
-                </select>
                 {!isPending && <button>Add Blog</button>}
                 {isPending && <button disabled>Adding Blog</button>}
             </form>
