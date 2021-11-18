@@ -1,13 +1,13 @@
 import { useParams, useHistory } from 'react-router-dom';
 import useFetch from './useFetch';
 
-const BlogDetails = () => {
+const MovieDetails = () => {
     const { id } = useParams();
-    const { data: blog, error, isPending } =  useFetch('http://localhost:8000/blog/' + id);
+    const { data: movie, error, isPending } =  useFetch('/movie/' + id);
     const history = useHistory();
 
     const handleClick = () => {
-        fetch('http://localhost:8000/blog/'+ blog.id, {
+        fetch('/movie/'+ movie.id, {
             method: 'DELETE'
         }).then(() => {
             history.push('/');
@@ -15,16 +15,16 @@ const BlogDetails = () => {
     }
 
     return ( 
-        <div className="blog-details">
+        <div className="movie-details">
             {isPending && <div>Loading...</div>}
             {error && <div>{error}</div>}
             <article >
-                <h2>{blog.title}</h2>
-                <div>{blog.content}</div>
+                <h2>{movie.title}</h2>
+                <div>{movie.content}</div>
                 <button onClick={handleClick}>Delete</button>
             </article>
         </div>
      );
 }
  
-export default BlogDetails;
+export default MovieDetails;

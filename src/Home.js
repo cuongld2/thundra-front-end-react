@@ -1,14 +1,14 @@
-import BlogList from './BlogList';
+import MovieList from './MovieList';
 import useFetch from './useFetch';
 
 const Home = () => {
-    const {data: blog, isPending, error} = useFetch('http://localhost:8000/blog');
+    const {data: movie, isPending, error} = useFetch('/movie');
 
     return ( 
         <div className="home">
             {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>}
-            <BlogList blog={blog} title="All Blogs"/>
+            <MovieList movie={movie} title="All movies"/>
         </div>
      );
 }
